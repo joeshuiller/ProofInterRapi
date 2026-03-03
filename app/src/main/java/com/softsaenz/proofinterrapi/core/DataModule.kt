@@ -25,7 +25,20 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-
+/**
+ * Módulo de Hilt encargado de la vinculación (Binding) de abstracciones de datos.
+ *
+ * Este módulo utiliza la anotación [Binds] para delegar a Hilt la resolución de
+ * interfaces hacia sus implementaciones específicas. Al ser una clase abstracta,
+ * es más eficiente que un módulo de proveedores estándar, ya que genera menos
+ * código en tiempo de compilación.
+ *
+ * ### Responsabilidades:
+ * 1. **Repositiorios:** Vincula las interfaces del Dominio con las implementaciones de Datos.
+ * 2. **Data Sources:** Vincula las definiciones de fuentes de datos con su lógica técnica (Local/Remota).
+ *
+ * Instalado en [SingletonComponent] para asegurar una única instancia global de cada recurso.
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataModule {
@@ -74,12 +87,5 @@ abstract class DataModule {
     @Singleton
     abstract fun bindLocationsDataSource(impl: LocationsDataSourceImpl):
             LocationsDataSource
-
-
-
-
-
-
-
 
 }

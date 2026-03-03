@@ -11,6 +11,19 @@ import com.softsaenz.proofinterrapi.data.local.repository.TablesDao
 import com.softsaenz.proofinterrapi.data.local.repository.UsersDao
 import com.softsaenz.proofinterrapi.data.local.repository.VersionDao
 
+/**
+ * Definición central de la base de datos local de la aplicación utilizando Room.
+ * * Esta clase abstracta es la encargada de configurar el motor de persistencia,
+ * registrando las entidades que componen el esquema y proporcionando los
+ * métodos de acceso para los Data Access Objects (DAOs).
+ *
+ * ### Configuración:
+ * - **Entidades:** Gestiona [TablesEntity], [UsersEntity], [LocationsEntity] y [VersionEntity].
+ * - **Versión:** Actualmente en la versión 2.
+ * - **Exportación:** El esquema no se exporta a archivos externos ([exportSchema] = false).
+ *
+ * @see RoomDatabase
+ */
 @Database(
     entities = [
         TablesEntity::class,
@@ -20,9 +33,17 @@ import com.softsaenz.proofinterrapi.data.local.repository.VersionDao
     version = 2,
     exportSchema = false
 )
-abstract class DbData: RoomDatabase() {
+abstract class DbData : RoomDatabase() {
+
+    /** Proveedor de operaciones para la tabla de Usuarios. */
     abstract fun usersDao(): UsersDao
-    abstract fun tablesDao():TablesDao
-    abstract fun locationsDao():LocationsDao
-    abstract fun versionDao():VersionDao
+
+    /** Proveedor de operaciones para la tabla de Metadatos de Tablas. */
+    abstract fun tablesDao(): TablesDao
+
+    /** Proveedor de operaciones para la tabla de Ubicaciones Logísticas. */
+    abstract fun locationsDao(): LocationsDao
+
+    /** Proveedor de operaciones para el control de versiones de sincronización. */
+    abstract fun versionDao(): VersionDao
 }

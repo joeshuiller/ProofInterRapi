@@ -3,7 +3,19 @@ package com.softsaenz.proofinterrapi.data.remote.utilsApi
 import com.softsaenz.proofinterrapi.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
-
+/**
+ * Interceptor de OkHttp encargado de la inyección automática de cabeceras de seguridad y contexto.
+ *
+ * Esta clase actúa en la capa de transporte de red, modificando la petición original
+ * para añadir los parámetros de autenticación y origen requeridos por el backend.
+ * * ### Seguridad y Configuración:
+ * Los valores se extraen directamente de [BuildConfig], lo que permite manejar
+ * diferentes credenciales según el entorno (Desarrollo, QA, Producción) sin
+ * modificar el código fuente.
+ *
+ * @see Interceptor
+ * @see OkHttpClient
+ */
 class ApiKeyInterceptor() : Interceptor {
     val users = BuildConfig.USERS
     val id = BuildConfig.ID

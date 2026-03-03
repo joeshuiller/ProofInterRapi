@@ -3,7 +3,21 @@ package com.softsaenz.proofinterrapi.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
+/**
+ * Entidad de persistencia que representa el catálogo maestro de ubicaciones.
+ * * Esta clase define la tabla 'locations' en SQLite. Es una entidad de "datos pesados"
+ * que integra la jerarquía administrativa (ancestros de 1er, 2do y 3er grado),
+ * configuraciones de servicios logísticos (recogidas, pre-envíos) y datos de
+ * georreferenciación.
+ * * @property id Clave primaria autoincremental única para el control interno de la DB.
+ * @property localityId Identificador único de la localidad (proveniente del servidor).
+ * @property name Nombre principal de la ubicación.
+ * @property fullName Nombre completo descriptivo (ej. Ciudad, Departamento, País).
+ * @property assignedZone Indica si la ubicación tiene una zona logística asignada.
+ * @property valuePickup Costo o valor asociado al servicio de recogida en esta zona.
+ * @property allowsPickup Define si la ubicación está habilitada como punto de recolección.
+ * @property createdAt Marca de tiempo de la creación del registro para auditoría local.
+ */
 @Entity(tableName = "locations")
 data class LocationsEntity(
     @PrimaryKey(autoGenerate = true)

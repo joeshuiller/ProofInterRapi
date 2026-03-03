@@ -4,6 +4,24 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Entidad de persistencia que almacena metadatos y esquemas para la sincronización dinámica.
+ * * Esta clase define la tabla 'tables_query', la cual actúa como un diccionario de
+ * configuración para las operaciones de base de datos. Permite almacenar desde
+ * sentencias SQL de creación hasta parámetros de paginación de la API.
+ *
+ * @property id Identificador único autoincremental (Clave Primaria).
+ * @property name Nombre de la tabla de destino en la base de datos local.
+ * @property pk Nombre de la clave primaria de la tabla referenciada.
+ * @property queryCreation Sentencia SQL necesaria para crear o inicializar la tabla.
+ * @property batchSize Cantidad de registros a procesar por cada petición de red.
+ * @property filter Cláusulas adicionales para filtrar los datos durante la sincronización.
+ * @property error Registro de incidencias o mensajes de error del último intento de sincronización.
+ * @property numberFields Cantidad de columnas o campos esperados.
+ * @property methodApp Identificador del método o endpoint de la API asociado.
+ * @property syncUpdateDate Fecha de la última actualización exitosa.
+ * @property createdAt Marca de tiempo local de cuando se registró esta configuración.
+ */
 @Entity(tableName = "tables_query")
 data class TablesEntity(
     @PrimaryKey(autoGenerate = true)

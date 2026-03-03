@@ -10,7 +10,23 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
-
+/**
+ * Implementación concreta del contrato [LocationsRepository].
+ *
+ * Esta clase se encarga de la gestión de datos de ubicaciones geográficas, coordinando
+ * la fuente de datos física ([LocationsDataSource]) y las transformaciones de modelos
+ * mediante [LocationsMapper].
+ *
+ * ### Responsabilidades:
+ * - **Mapeo de Capas:** Convierte entidades de base de datos a [LocationsDTO] y viceversa.
+ * - **Gestión Reactiva:** Proporciona flujos de datos ([Flow]) con estados [ResourceLocal]
+ * para facilitar la actualización de la UI.
+ * - **Concurrencia:** Ejecuta las consultas pesadas en el hilo de E/S ([Dispatchers.IO])
+ * para evitar "lags" en la interfaz.
+ *
+ * @property locationsData Origen de los datos (DAO/Base de datos).
+ * @property locationsMapper Componente de conversión entre modelos de datos y dominio.
+ */
 class LocationsRepositoryImpl @Inject constructor(
     private val locationsData: LocationsDataSource,
     private val locationsMapper: LocationsMapper

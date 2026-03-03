@@ -17,7 +17,21 @@ import retrofit2.Response
 import javax.inject.Inject
 import kotlin.collections.List
 import kotlin.collections.map
-
+/**
+ * Implementación concreta del contrato [RemoteDataRepository].
+ *
+ * Esta clase orquestra la comunicación con el servidor remoto a través de [RemoteDataSource].
+ * Su responsabilidad principal es gestionar el ciclo de vida de las peticiones de red,
+ * envolviendo los resultados en un estado [Resource] (Loading, Success, Error).
+ *
+ * ### Características:
+ * - **Mapeo de Capas:** Utiliza [AuthRemoteDataMapper] para desacoplar los modelos de red de los modelos de dominio.
+ * - **Manejo de Reactividad:** Devuelve [Flow] para permitir una observación asíncrona de los datos.
+ * - **Seguridad de Hilos:** Garantiza que todas las llamadas de red se ejecuten en el despachador [Dispatchers.IO].
+ *
+ * @property remoteData Fuente de datos remota (Retrofit Service).
+ * @property authMapper Utilidad para convertir DTOs de dominio a modelos de petición de API.
+ */
 class RemoteDataRepositoryImpl @Inject constructor(
     private val remoteData: RemoteDataSource,
     private val authMapper: AuthRemoteDataMapper

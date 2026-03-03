@@ -10,7 +10,22 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
-
+/**
+ * Implementación de la interfaz [UsersRepository].
+ *
+ * Esta clase orquestra el flujo de datos de usuarios, aplicando transformaciones
+ * entre los modelos de dominio ([UsersDTO]) y los modelos de persistencia a través
+ * de un [UsersMapper].
+ *
+ * ### Características:
+ * - **Gestión de Estados:** Utiliza [ResourceLocal] para emitir estados de carga, éxito y error.
+ * - **Threading:** Todas las operaciones de flujo se ejecutan explícitamente en [Dispatchers.IO]
+ * para no bloquear el hilo de ejecución principal (UI).
+ * - **Desacoplamiento:** Separa la fuente de datos ([UsersDataSource]) del resto de la app.
+ *
+ * @property usersData Fuente de datos local (DAO/DB).
+ * @property usersMapper Utilidad para el mapeo de objetos entre capas.
+ */
 class UsersRepositoryImpl @Inject constructor(
     private val usersData: UsersDataSource,
     private val usersMapper: UsersMapper
