@@ -14,7 +14,7 @@ tasks.dokkaHtml {
         moduleName.set("Proof Inter Rapi App")
 
         // Incluye una descripción de la arquitectura en la página de inicio
-        includes.from("module-info.md")
+        includes.from("README.md", "module.md")
 
         // No documentar archivos generados (como BuildConfig)
         suppressGeneratedFiles.set(true)
